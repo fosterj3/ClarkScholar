@@ -1,0 +1,35 @@
+---
+title: "Clark Infographic"
+author: "Lamar Foster"
+date: "3/31/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(usmap) 
+library(tidyverse)
+library(leaflet)
+```
+
+```{r}
+SEL <- read.csv("State_Capitol_Buildings.csv")
+
+SEL <- SEL %>% 
+  rename(
+    "Lat" = X,
+    "Long" = Y
+  )
+```
+
+
+```{r}
+plot_usmap(regions = "counties", include = "WA", fill = "#85754d", color = "#4b2e83") + 
+  theme(panel.background=element_blank())
+
+ggsave("WA.png")
+```
+
